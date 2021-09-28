@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'package:todo_app/modules/archived_task.dart';
 import 'package:todo_app/modules/done_task.dart';
 import 'package:todo_app/modules/new_task.dart';
@@ -15,9 +14,9 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
   List<Widget> screens = [
-    NewTaskScreen(),
-    DoneTasksScreen(),
-    ArchivedTasksScreen(),
+    NewTasks(),
+    DoneTasks(),
+    ArchivedTasks(),
   ];
 
   void changeIndex(int index) {
@@ -64,17 +63,15 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void insertIntoDB(
-      {
-        required String? title,
-        required String? date,
-        required String? time}) async {
+      {required String? title,
+      required String? date,
+      required String? time}) async {
     await db!.insert('tasks', {
       'title': title,
       'date': date,
       'time': time,
       'status': 'active',
-    }
-    ).then((value) {
+    }).then((value) {
       print('Data added!! $value');
       emit(AppInsertDataBaseState());
       getFromDB(db);
@@ -116,5 +113,13 @@ class AppCubit extends Cubit<AppStates> {
     await db!.rawDelete('DELETE from tasks WHERE id = ?', [id]);
     getFromDB(db);
     emit(AppDeleteDataBaseState());
+    Toast(msg: 'Deleted Successfully');
+  }
+
+  void Toast({required String msg}) {
+    Fluttertoast.showToast(
+      msg: msg,
+      backgroundColor: Colors.black54,
+    );
   }
 }

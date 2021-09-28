@@ -1,6 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo_app/shared/cubit/cubit.dart';
+
+var num = 1;
+var num2 = 2;
+
 
 Widget defaultButton({
   double width = double.infinity,
@@ -97,6 +103,10 @@ Widget buildTaskItem(Map? model, context) {
             IconButton(
                 onPressed: () {
                   cubit.updateDB(status: 'done', id: model['id']);
+                  Fluttertoast.showToast(
+                    msg: 'Done',
+                    backgroundColor: Colors.black54,
+                  );
                 },
                 icon: Icon(
                   Icons.check_box_rounded,
@@ -105,6 +115,10 @@ Widget buildTaskItem(Map? model, context) {
             IconButton(
                 onPressed: () {
                   cubit.updateDB(status: 'archive', id: model['id']);
+                  Fluttertoast.showToast(
+                    msg: 'Archived',
+                    backgroundColor: Colors.black54,
+                  );
                 },
                 icon: Icon(
                   Icons.archive,
@@ -122,7 +136,7 @@ Widget buildTask({BuildContext? context, List<Map?>? tasks}) {
     context: context!,
     widgetBuilder: (context) => ListView.separated(
       itemBuilder: (context, index) => buildTaskItem(tasks![index], context),
-      separatorBuilder: (context, index) =>Divider(),
+      separatorBuilder: (context, index) => Divider(),
       itemCount: tasks!.length,
     ),
     conditionBuilder: (context) => tasks!.length > 0,
@@ -144,4 +158,6 @@ Widget buildTask({BuildContext? context, List<Map?>? tasks}) {
     ),
   );
 }
+
 Widget Divider() => Container(width: double.infinity, height: 1.0);
+

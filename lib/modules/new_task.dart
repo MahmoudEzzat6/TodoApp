@@ -6,8 +6,7 @@ import 'package:flutter_conditional_rendering/conditional.dart';
 import '../shared/components.dart';
 import '../shared/cubit/cubit.dart';
 
-class NewTaskScreen extends StatelessWidget {
-  const NewTaskScreen({Key? key}) : super(key: key);
+class NewTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
