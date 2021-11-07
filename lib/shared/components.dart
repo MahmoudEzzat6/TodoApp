@@ -54,6 +54,7 @@ Widget defaultTextField({
 Widget buildTaskItem(Map? model, context) {
   AppCubit cubit = AppCubit.get(context);
   return Dismissible(
+    background: Container(color: Colors.red,),
     onDismissed: (direction) {
       cubit.deleteRows(model!['id']);
     },
@@ -94,7 +95,7 @@ Widget buildTaskItem(Map? model, context) {
                   Text(
                     '${model['date']}',
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Colors.indigo,
                     ),
                   ),
                 ],
@@ -105,7 +106,7 @@ Widget buildTaskItem(Map? model, context) {
                   cubit.updateDB(status: 'done', id: model['id']);
                   Fluttertoast.showToast(
                     msg: 'Done',
-                    backgroundColor: Colors.black54,
+                    backgroundColor: Colors.green,
                   );
                 },
                 icon: Icon(
@@ -117,7 +118,8 @@ Widget buildTaskItem(Map? model, context) {
                   cubit.updateDB(status: 'archive', id: model['id']);
                   Fluttertoast.showToast(
                     msg: 'Archived',
-                    backgroundColor: Colors.black54,
+                    textColor: Colors.black54,
+                    backgroundColor: Colors.amberAccent,
                   );
                 },
                 icon: Icon(
@@ -146,7 +148,7 @@ Widget buildTask({BuildContext? context, List<Map?>? tasks}) {
         children: [
           Icon(
             Icons.menu,
-            color: Colors.grey,
+            color: Colors.deepPurple,
             size: 100.0,
           ),
           Text(

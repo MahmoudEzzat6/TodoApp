@@ -113,13 +113,15 @@ class AppCubit extends Cubit<AppStates> {
     await db!.rawDelete('DELETE from tasks WHERE id = ?', [id]);
     getFromDB(db);
     emit(AppDeleteDataBaseState());
-    Toast(msg: 'Deleted Successfully');
+    Toast(
+        msg: 'Deleted Successfully', background: Colors.red,
+    );
   }
 
-  void Toast({required String msg}) {
+  void Toast({required String msg,required Color background}) {
     Fluttertoast.showToast(
       msg: msg,
-      backgroundColor: Colors.black54,
+      backgroundColor: background,
     );
   }
 }

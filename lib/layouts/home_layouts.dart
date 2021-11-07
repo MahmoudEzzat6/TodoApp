@@ -17,18 +17,19 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) => {
-              if (state is AppInsertDataBaseState) {Navigator.pop(context)}
+              if (state is AppInsertDataBaseState) {
+                Navigator.pop(context)}
             },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
-              backgroundColor: Colors.black45,
+              backgroundColor: Colors.indigo,
               title: Text("${cubit.screens[cubit.currentIndex]}"),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black45,
+              backgroundColor: Colors.indigo,
               foregroundColor: Colors.white,
               onPressed: () {
                 if (cubit.isBottomSheet!) {
@@ -100,7 +101,7 @@ class HomeLayout extends StatelessWidget {
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime.now(),
                                             lastDate:
-                                                DateTime.parse('2021-10-18'),
+                                                DateTime.parse('2021-12-31'),
                                           ).then((value) {
                                             dateController.text =
                                                 DateFormat.yMMMd()
